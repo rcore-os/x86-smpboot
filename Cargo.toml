@@ -1,0 +1,11 @@
+[package]
+name = "x86-smpboot"
+version = "0.1.0"
+authors = ["Runji Wang <wangrunji0408@163.com>"]
+edition = "2018"
+description = "Booting multi-processors on x86 bare-metal."
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+x86 = "0.34"
