@@ -32,9 +32,9 @@ ap_start:
     mov     es, ax
     mov     ss, ax
 
-    # set PAE and PGE bit
+    # set PAE, PGE, OSFXSR, OSXMMEXCPT bit
     mov     eax, cr4
-    or      eax, (1 << 5) | (1 << 7)
+    or      eax, (1 << 5) | (1 << 7) | (1 << 9) | (1 << 10)
     mov     cr4, eax
 
     # load cr3
@@ -47,9 +47,9 @@ ap_start:
     or      eax, (1 << 8) | (1 << 11)
     wrmsr
 
-    # set paging and protected mode bit
+    # set protected mode, monitor co-processor, paging bit
     mov     eax, cr0
-    or      eax, (1 << 31) | 1
+    or      eax, (1 << 0) | (1 << 1) | (1 << 31)
     mov     cr0, eax
 
     # set temporary stack
