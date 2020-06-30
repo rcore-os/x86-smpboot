@@ -11,5 +11,5 @@ log = "0.4"
 uefi = "0.4.6"
 uefi-services = "0.2.4"
 rlibc = "1.0.0"
-raw-cpuid = "8.1.0"
+raw-cpuid = "8.0.0"
 x86-smpboot = { path = "../.." }
