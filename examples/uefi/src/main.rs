@@ -1,7 +1,6 @@
 #![no_std]
 #![no_main]
 #![feature(abi_efiapi)]
-#![feature(const_in_array_repeat_expressions)]
 #![deny(warnings)]
 
 extern crate alloc;
@@ -13,8 +12,8 @@ use log::*;
 use uefi::prelude::*;
 
 #[entry]
-fn efi_main(_image: Handle, st: SystemTable<Boot>) -> uefi::Status {
-    uefi_services::init(&st).expect_success("Failed to initialize utilities");
+fn efi_main(_image: Handle, mut st: SystemTable<Boot>) -> uefi::Status {
+    uefi_services::init(&mut st).expect_success("Failed to initialize utilities");
     info!("test booting multi-processors");
     unsafe {
         fn stack_fn(_pid: usize) -> usize {
@@ -34,7 +33,8 @@ fn efi_main(_image: Handle, st: SystemTable<Boot>) -> uefi::Status {
     panic!("finished")
 }
 
-static STARTED: [AtomicBool; 64] = [AtomicBool::new(false); 64];
+const FALSE: AtomicBool = AtomicBool::new(false);
+static STARTED: [AtomicBool; 64] = [FALSE; 64];
 
 fn ap_main() {
     let apic_id = raw_cpuid::CpuId::new()

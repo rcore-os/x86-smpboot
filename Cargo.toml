@@ -8,4 +8,4 @@ description = "Booting multi-processors on x86 bare-metal."
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-x86 = "0.33"
+x86 = "0.46"

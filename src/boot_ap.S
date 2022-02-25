@@ -22,7 +22,6 @@
 .global ap_end
 
 .text
-.intel_syntax noprefix
 .code16
 ap_start:
     cli

@@ -1,7 +1,7 @@
 #![no_std]
-#![feature(global_asm)]
 #![deny(warnings)]
 
+use core::arch::global_asm;
 use x86::apic::{xapic::XAPIC, ApicControl, ApicId};
 
 global_asm!(include_str!("boot_ap.S"));
@@ -68,6 +68,6 @@ fn delay_us(us: u64) {
     let freq = 3_000_000_000u64; // assume 3GHz
     let end = start + freq / 1_000_000 * us;
     while unsafe { _rdtsc() } < end {
-        core::sync::atomic::spin_loop_hint();
+        core::hint::spin_loop();
     }
 }
